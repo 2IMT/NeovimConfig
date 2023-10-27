@@ -67,3 +67,29 @@ vim.keymap.set("n", "<leader>F", "<cmd>lua vim.lsp.buf.format()<CR>")
 --------------------------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>T", "<cmd>ToggleTerm size=11<CR>")
+
+--------------------------------------------------------------------------------
+-- Dap keymaps --
+--------------------------------------------------------------------------------
+
+vim.keymap.set("n", "<leader><F5>", "<cmd>DapContinue<CR>")
+vim.keymap.set("n", "<leader><F6>", "<cmd>DapStepOver<CR>")
+vim.keymap.set("n", "<leader><F7>", "<cmd>DapStepInto<CR>")
+vim.keymap.set("n", "<leader><F8>", "<cmd>DapStepOut<CR>")
+vim.keymap.set("n", "<leader><F12>", "<cmd>DapTerminate<CR>")
+vim.keymap.set("n", "<leader>Db", "<cmd>DapToggleBreakpoint<CR>")
+
+--------------------------------------------------------------------------------
+-- DapUi keymaps --
+--------------------------------------------------------------------------------
+
+vim.keymap.set("n", "<leader>Dt", "<cmd>lua require('dapui').toggle()<CR>")
+vim.keymap.set("n", "<leader>Do", "<cmd>lua require('dapui').open()<CR>")
+vim.keymap.set("n", "<leader>Dc", "<cmd>lua require('dapui').close()<CR>")
+
+vim.keymap.set("n", "<leader>De", function()
+    vim.ui.input({prompt = "Evaluate Expression: "},
+                 function(input) require("dapui").eval(input) end)
+end)
+
+vim.keymap.set("n", "<leader>DE", "<cmd>lua require('dapui').eval()<CR>")

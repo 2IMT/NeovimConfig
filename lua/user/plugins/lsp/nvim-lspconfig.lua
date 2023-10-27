@@ -42,7 +42,7 @@ return {
                        "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
 
             opts.desc = "Show line diagnostics"
-            keymap.set("n", "<leader>d", vim.diagnostics.open_float, opts)
+            keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
             opts.desc = "Go to previous diagnostic"
             keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
@@ -101,19 +101,25 @@ return {
             on_attach = on_attach
         })
 
-        lspconfig["omnisharp"].setup({
-            capabilities = capabilities,
-            on_attach = on_attach
-        })
-
         lspconfig["clangd"].setup({
             capabilities = capabilities,
-            on_attach = on_attach
+            on_attach = on_attach,
+            root_dir = lspconfig.util.root_pattern('.clangd', '.clang-tidy',
+                                                   '.clang-format',
+                                                   'compile_commands.json',
+                                                   'compile_flags.txt',
+                                                   'configure.ac', '.git')
         })
 
         lspconfig["cmake"].setup({
             capabilities = capabilities,
             on_attach = on_attach
+        })
+
+        lspconfig["rust_analyzer"].setup({
+            on_attach = on_attach,
+            server = {capabilities = capabilities, standalone = true},
+            settings = {["rust-analyzer"] = {checkOnSave = true}}
         })
     end
 }
