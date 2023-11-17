@@ -23,8 +23,7 @@ return {
 
         mason_lspconfig.setup({
             ensure_installed = {
-                "html", "cssls", "lua_ls", "pyright", "jdtls", "clangd",
-                "cmake", "rust_analyzer"
+                "html", "cssls", "lua_ls", "pyright", "jdtls", "clangd", "cmake"
             },
             automatic_installation = true
         })

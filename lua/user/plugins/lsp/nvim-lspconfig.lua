@@ -108,7 +108,8 @@ return {
                                                    '.clang-format',
                                                    'compile_commands.json',
                                                    'compile_flags.txt',
-                                                   'configure.ac', '.git')
+                                                   'configure.ac', '.git'),
+            cmd = {"clangd", "--offset-encoding=utf-16"}
         })
 
         lspconfig["cmake"].setup({
@@ -117,9 +118,15 @@ return {
         })
 
         lspconfig["rust_analyzer"].setup({
+            capabilities = capabilities,
             on_attach = on_attach,
             server = {capabilities = capabilities, standalone = true},
             settings = {["rust-analyzer"] = {checkOnSave = true}}
+        })
+
+        lspconfig["jdtls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach
         })
     end
 }
